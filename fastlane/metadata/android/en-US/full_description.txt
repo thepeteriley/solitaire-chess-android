@@ -1,0 +1,7 @@
+Play chess with the evaluation in view. Stockfish 19 analyses positions on your device and shows up to five candidate continuations.
+
+Play against an adjustable-strength computer or move both sides yourself. Explore a suggested line, then return to your game. Undo, browse move history, flip the board or load a FEN position.
+
+Portrait puts the board above the analysis. Landscape puts them side by side. Your current game is saved on this device.
+
+Fully offline, with no account, ads, analytics, Google Play Services or network permission. Android distribution: GPLv3 or later; shared interface: MIT.

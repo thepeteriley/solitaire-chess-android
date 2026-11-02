@@ -1,0 +1,1 @@
+Initial Android release: offline Stockfish analysis, computer play, variation previews, FEN, and portrait/landscape layouts.

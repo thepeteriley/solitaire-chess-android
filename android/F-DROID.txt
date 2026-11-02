@@ -1,0 +1,24 @@
+F-Droid inclusion preparation — not submitted or approved
+
+Application ID: com.peteriley.solitairechess
+Name: Solitaire Chess
+Category: Games
+Combined Android distribution licence: GPL-3.0-or-later
+Shared original interface: MIT (notice retained)
+Source: https://github.com/thepeteriley/solitaire-chess-android
+Release tag: v1.0.0
+Version name / code: 1.0.0 / 1
+Build tools: JDK 17; Node.js >=22.12; Gradle 8.11.1; AGP 8.9.2; compile/target SDK 36; build-tools 36.0.0; NDK 28.2.13676358; CMake 3.22.1.
+Native architectures: arm64-v8a, x86_64.
+
+The repository contains the Android host, shared UI source, Stockfish source and model data. All native code is compiled from source. No proprietary SDKs, Google Play Services, tracking, ads, remote engine or network permission are used. The model is licensed Stockfish data, not a downloaded executable. Exact model hash and upstream source revision are documented in README.
+
+Build sequence: npm ci; node android/prepare.mjs; cd android; ./gradlew assembleRelease.
+
+Store text is under fastlane/metadata/android/en-US. Signing keys are not in the repository. Reproducibility against the GitHub APK has not been verified. A maintainer will need to review npm dependency fetching/build preparation, model provenance, bundled JavaScript source rebuilding and the appropriate F-Droid recipe before accepting the app. A default F-Droid signing key would differ from the GitHub signing identity; prefer reproducible upstream-signature verification if feasible.
+
+Official inclusion instructions: https://f-droid.org/docs/Inclusion_How-To/
+Inclusion policy: https://f-droid.org/docs/Inclusion_Policy/
+Reproducible builds: https://f-droid.org/docs/Reproducible_Builds/
+
+No issue, merge request or message to F-Droid maintainers has been sent.

@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.gradle/
+**/.gradle/
+**/build/
+**/.cxx/
+**/local.properties
+android/app/src/main/assets/
+android/qa/
+android/release/
+*.jks
+*.p12
+.DS_Store

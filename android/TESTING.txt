@@ -1,0 +1,32 @@
+Solitaire Chess Android 1.0.0 — verification, 2 November 2026
+
+Device environment: ARM64 AOSP Android 16/API 36 emulator configured as Pixel 8. Tested a debug build and the independently signed, non-debuggable release APK.
+
+Passed with the real JNI Stockfish 19 engine:
+- Five complete candidate PVs, each validated move-by-move with chess.js.
+- Portrait board above analysis; landscape board beside analysis.
+- Rotation preserves both the WebView instance and played position.
+- Candidate preview, stepping through a variation, return to game, legal moves and undo.
+- Computer opponent playing either colour, with legal responses.
+- Knight underpromotion, castling and en passant.
+- Checkmate and a forced black mate scored negatively from White's perspective.
+- Background/resume retains the game and resumes analysis.
+- No renderer errors during either complete run.
+
+The exact signed release APK was installed afresh and passed the same complete flow. The AOSP userdebug image exposes a WebView diagnostic socket even for a release app; this platform test hook was used for automated UI inspection. Android package flags confirm that the installed APK is not debuggable, and the release host explicitly disables WebView debugging.
+
+Release checks:
+- Gradle assembleRelease and lintRelease passed. Lint has one expected warning for the required JavaScript-enabled, bundled-assets-only WebView; its external navigation, file/content access and network use are restricted.
+- Manifest requests zero permissions, including no Internet permission.
+- APK signature verifies with v2 and v3; signing certificate SHA-256: 5708399a8639b1e1c070963b6ff5e8361fa9d635347f206e1cff83fa1ccf742e.
+- ARM64 and x86-64 native ELF load segments are aligned to 0x4000 (16 KiB); zipalign -c -P 16 4 passes for the release APK.
+- Model SHA-256 verified during asset preparation and on extraction into app-private storage.
+- APK includes full GPL, shared-interface MIT and component/NDK runtime notices.
+
+Limits: No physical GrapheneOS phone was available for testing. Vanadium WebView, GrapheneOS-specific hardening, actual 16 KiB kernel runtime, older Android versions and x86-64 Android runtime have not been tested. No F-Droid review or reproducible-build verification has been performed.
+
+Reproduce UI checks on an emulator only, with one device connected and a fresh installed app:
+  node android/test-ui.mjs
+Provide ADB on PATH or set the ADB environment variable to its executable. Production phones should be tested manually; the script deliberately requires an emulator.
+
+Clean source-export rebuild: npm ci, asset preparation and assembleRelease passed using only the exported repository. All APK assets and classes.dex matched the tested signed release. Native-library bit-for-bit reproducibility has not been claimed.
